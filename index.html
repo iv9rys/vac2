@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAC – Valorant · Agent · Comps</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="home-body">
+
+    <div class="vac-stage" id="vacStage">
+        <div class="vac-fit" id="vacFit">
+            <div class="vac-row" id="vacRow">
+                <span class="vac-bar" aria-hidden="true"></span>
+                <span class="vac-word"><span class="vac-cap">V</span><span class="vac-tail vac-t1">alorant</span></span>
+                <span class="vac-word"><span class="vac-cap">A</span><span class="vac-tail vac-t2">gent</span></span>
+                <span class="vac-word"><span class="vac-cap">C</span><span class="vac-tail vac-t3">omps</span></span>
+            </div>
+        </div>
+    </div>
+    <div class="vac-credit" aria-hidden="true">by &middot; iv9rys</div>
+
+    <div class="home-content">
+        <div class="home-buttons">
+            <a href="builder.html" class="home-btn">Open Comp Builder</a>
+            <a href="comps.html" class="home-btn">View Saved Comps</a>
+            <a href="settings.html" class="home-btn">Settings</a>
+        </div>
+    </div>
+
+    <div class="home-footer">
+        <a href="https://www.vlr.gg/" target="_blank" rel="noopener" class="vlr-badge">
+            VLR<span class="vlr-dot">.gg</span>
+        </a>
+        <div class="creator-text">
+            created by <a href="https://x.com/iv9rys" class="creator-link" target="_blank" rel="noopener">@iv9rys</a>
+        </div>
+    </div>
+
+    <script>
+        const vacFit = document.getElementById('vacFit');
+        const vacRow = document.getElementById('vacRow');
+        const vacStage = document.getElementById('vacStage');
+        let contentW = 0, contentH = 0;
+
+        // Measure the maximum content dimensions once (with longest tail open).
+        // This also triggers the animation to start cleanly from the beginning.
+        function measureContent() {
+            const tails = vacRow.querySelectorAll('.vac-tail');
+            const prev = [];
+            tails.forEach((t, i) => {
+                prev.push(t.style.animation);
+                t.style.animation = 'none';
+                t.style.maxWidth = i === 0 ? '20em' : '0';
+            });
+            void vacRow.offsetWidth;
+            contentW = vacRow.scrollWidth;
+            contentH = vacRow.scrollHeight;
+            tails.forEach((t, i) => {
+                t.style.maxWidth = '';
+                t.style.animation = prev[i];
+            });
+        }
+
+        // Recalculate scale from cached dimensions — safe to call on resize
+        // because it never touches the animations.
+        function applyScale() {
+            const margin = 20;
+            const sx = (vacStage.offsetWidth  - margin * 2) / contentW;
+            const sy = (vacStage.offsetHeight - margin * 2) / contentH;
+            vacFit.style.setProperty('--s', Math.min(sx, sy));
+        }
+
+        (async () => {
+            try {
+                await document.fonts.load('900 96px "Archivo Black"');
+                await document.fonts.ready;
+            } catch(e) {}
+            measureContent();
+            applyScale();
+        })();
+
+        // Resize only recalculates the scale — never restarts the animation.
+        window.addEventListener('resize', applyScale);
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builder – VAC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+    <a href="index.html" class="logo-link">
+        <span class="logo-vac">VAC</span>
+    </a>
+    <a href="comps.html" class="top-btn">Saved Comps</a>
+    <a href="settings.html" class="top-btn">Settings</a>
+</div>
+
+<div class="container">
+
+    <aside class="sidebar">
+        <h2>Map Pool</h2>
+        <div id="map-list"></div>
+        <h2>Banned Map</h2>
+        <div class="subtext">(optional)</div>
+        <select id="ban-select"></select>
+    </aside>
+
+    <main class="main-content">
+        <div class="map-header">
+            <h1 id="current-map">Select a Map</h1>
+            <button id="save-btn" class="save-btn" disabled>Save Comp</button>
+        </div>
+        <div id="player-slots" class="player-slots"></div>
+        <div id="agent-sections"></div>
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
