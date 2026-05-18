@@ -493,7 +493,7 @@ function renderSettings() {
             <span class="player-label-default">P${i + 1}</span>
             <input type="text" class="player-label-input"
                    value="${label === `P${i + 1}` ? "" : label}"
-                   maxlength="4" placeholder="P${i + 1}" spellcheck="false">
+                   maxlength="5" placeholder="P${i + 1}" spellcheck="false">
         `;
         item.querySelector("input").addEventListener("input", e => {
             playerLabels[i] = e.target.value.toUpperCase();
