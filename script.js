@@ -1,6 +1,6 @@
 const allMaps = [
     "Ascent", "Breeze", "Lotus", "Split", "Pearl",
-    "Haven", "Fracture", "Bind", "Abyss", "Corrode", "Sunset"
+    "Haven", "Fracture", "Bind", "Abyss", "Corrode", "Sunset", "Icebox"
 ];
 
 const defaultPool = [
@@ -9,9 +9,9 @@ const defaultPool = [
 
 const agentsByClass = {
     Duelists:    ["jett", "raze", "reyna", "phoenix", "neon", "iso", "yoru", "waylay"],
-    Controllers: ["astra", "brimstone", "clove", "harbor", "omen", "viper"],
+    Controllers: ["astra", "brimstone", "clove", "harbor", "omen", "viper", "miks"],
     Initiators:  ["breach", "fade", "gekko", "kayo", "skye", "sova", "tejo"],
-    Sentinels:   ["chamber", "cypher", "deadlock", "killjoy", "sage", "vyse", "miks", "veto"]
+    Sentinels:   ["chamber", "cypher", "deadlock", "killjoy", "sage", "vyse", "veto"]
 };
 
 let mapPool      = JSON.parse(localStorage.getItem("mapPool")) || defaultPool;
