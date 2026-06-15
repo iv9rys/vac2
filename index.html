@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAC – Valorant · Agent · Comps</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XCKW2P4T9G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XCKW2P4T9G');
+</script>
+<style>
+/* ── Intro overlay ──────────────────────────────── */
+#vac-intro {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    background: #0d0d0d;
+    transition: opacity 0.5s ease;
+}
+body.light #vac-intro { background: #f6f6f4; }
+
+#vac-intro-crest {
+    width: 200px; height: 200px;
+    filter: drop-shadow(0 0 32px rgba(var(--accent-rgb), 0.35));
+}
+#vac-intro-crest svg { width: 100%; height: 100%; overflow: visible; }
+
+/* Shield: delay 0.25s, draws for 1.0s → done at 1.25s */
+#intro-shield {
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+    animation: vac-draw 1.0s cubic-bezier(0.35, 0, 0.15, 1) forwards 0.25s;
+}
+/* V: delay 1.15s, draws for 0.5s → done at 1.65s */
+#intro-v {
+    stroke-dasharray: 65;
+    stroke-dashoffset: 65;
+    animation: vac-draw 0.5s ease forwards 1.15s;
+}
+@keyframes vac-draw { to { stroke-dashoffset: 0; } }
+
+@keyframes vac-glow {
+    0%   { filter: drop-shadow(0 0 32px rgba(var(--accent-rgb), 0.35)); }
+    45%  { filter: drop-shadow(0 0 56px rgba(var(--accent-rgb), 0.70)); }
+    100% { filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.30)); }
+}
+
+/* ── Home hero crest ─────────────────────────────── */
+.home-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+.home-hero-svg {
+    width: 200px;
+    height: 200px;
+    display: block;
+    overflow: visible;
+    filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.28));
+}
+</style>
+</head>
+<body class="home-body">
+    <script>
+        (function() {
+            if (localStorage.getItem("lightMode") === "true") document.body.classList.add("light");
+            var ac = localStorage.getItem("accentColor");
+            if (ac) {
+                document.body.style.setProperty("--accent", ac);
+                var r = parseInt(ac.slice(1,3),16), g = parseInt(ac.slice(3,5),16), b = parseInt(ac.slice(5,7),16);
+                document.body.style.setProperty("--accent-rgb", r+", "+g+", "+b);
+            }
+        })();
+    </script>
+
+    <!-- Intro overlay: large animated crest (removed after animation) -->
+    <div id="vac-intro">
+        <div id="vac-intro-crest">
+            <svg viewBox="12 9 76 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path id="intro-shield" stroke="var(--accent)" stroke-width="5.5"
+                      stroke-linejoin="round" stroke-linecap="round" fill="none"
+                      d="M50 13 L83 25 V51 C83 73 50 88 50 88 C50 88 17 73 17 51 V25 Z"/>
+                <path id="intro-v" stroke="var(--accent)" stroke-width="7"
+                      stroke-linejoin="round" stroke-linecap="round" fill="none"
+                      d="M36 39 L50 64 L66 39"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Permanent large crest (revealed when intro fades out) -->
+    <div class="home-hero" id="home-hero" style="opacity:0; transition:opacity 0.4s ease;">
+        <svg class="home-hero-svg" viewBox="12 9 76 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="var(--accent)" stroke-width="5.5"
+                  stroke-linejoin="round" stroke-linecap="round" fill="none"
+                  d="M50 13 L83 25 V51 C83 73 50 88 50 88 C50 88 17 73 17 51 V25 Z"/>
+            <path stroke="var(--accent)" stroke-width="7"
+                  stroke-linejoin="round" stroke-linecap="round" fill="none"
+                  d="M36 39 L50 64 L66 39"/>
+        </svg>
+    </div>
+
+    <!-- Credit -->
+    <div class="vac-credit" id="home-credit"
+         style="opacity:0; animation:none; transition:opacity 0.5s ease 0.1s;"
+         aria-hidden="true">by &middot; iv9rys</div>
+
+    <!-- Nav buttons -->
+    <div class="home-content" id="home-content" style="opacity:0; transition:opacity 0.5s ease 0.15s;">
+        <div class="home-buttons">
+            <a href="builder.html" class="home-btn">Open Comp Builder</a>
+            <a href="comps.html" class="home-btn">View Saved Comps</a>
+            <a href="veto.html" class="home-btn">Veto Tool</a>
+            <a href="extra-tools.html" class="home-btn">Extra Tools</a>
+            <a href="settings.html" class="home-btn">Settings</a>
+        </div>
+    </div>
+
+    <div class="home-footer" id="home-footer" style="opacity:0; transition:opacity 0.5s ease 0.2s;">
+        <div class="footer-left">
+            <a href="https://valoplant.gg/" target="_blank" rel="noopener" class="vlr-badge">
+                valoplant<span class="vlr-dot">.gg</span>
+            </a>
+            <a href="https://www.vlr.gg/" target="_blank" rel="noopener" class="vlr-badge">
+                VLR<span class="vlr-dot">.gg</span>
+            </a>
+        </div>
+        <div class="footer-right">
+            <a href="https://buymeacoffee.com/iv9rys4" target="_blank" rel="noopener" class="bmc-btn-sm">☕ Buy Me a Coffee</a>
+            <div class="creator-text">
+                created by <a href="https://x.com/iv9rys" class="creator-link" target="_blank" rel="noopener">@iv9rys</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var intro      = document.getElementById('vac-intro');
+            var introCrest = document.getElementById('vac-intro-crest');
+            var homeHero   = document.getElementById('home-hero');
+
+            function showAll(instant) {
+                var credit  = document.getElementById('home-credit');
+                var content = document.getElementById('home-content');
+                var footer  = document.getElementById('home-footer');
+                if (instant) {
+                    credit.style.transition  = 'none';
+                    content.style.transition = 'none';
+                    footer.style.transition  = 'none';
+                }
+                credit.style.opacity  = '1';
+                content.style.opacity = '1';
+                footer.style.opacity  = '1';
+            }
+
+            // Skip animation on return visits
+            if (sessionStorage.getItem('vac-intro-done')) {
+                intro.remove();
+                homeHero.style.transition = 'none';
+                homeHero.style.opacity = '1';
+                showAll(true);
+                return;
+            }
+
+            // Glow pulse when V finishes drawing (1.65s)
+            setTimeout(function () {
+                introCrest.style.animation = 'vac-glow 0.7s ease forwards';
+            }, 1650);
+
+            // After hold (2.2s): reveal permanent crest underneath, fade out overlay
+            setTimeout(function () {
+                homeHero.style.opacity = '1';
+                intro.style.opacity = '0';
+                intro.style.pointerEvents = 'none';
+
+                setTimeout(function () {
+                    showAll(false);
+                    intro.remove();
+                    sessionStorage.setItem('vac-intro-done', '1');
+                }, 500);
+
+            }, 2200);
+        })();
+    </script>
+</body>
+</html>
