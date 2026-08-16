@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/vlr-comps.js": {
+      "maxDuration": 30
+    }
+  }
+}
