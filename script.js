@@ -4,11 +4,11 @@ const allMaps = [
 ];
 
 const defaultPool = [
-    "Ascent", "Breeze", "Lotus", "Split", "Sunset", "Haven", "Fracture"
+    "Summit", "Bind", "Lotus", "Corrode", "Sunset", "Haven", "Abyss"
 ];
 
 const agentsByClass = {
-    Duelists:    ["jett", "raze", "reyna", "phoenix", "neon", "iso", "yoru", "waylay"],
+    Duelists:    ["jett", "raze", "reyna", "phoenix", "neon", "iso", "yoru", "waylay", "hush"],
     Controllers: ["astra", "brimstone", "clove", "harbor", "omen", "viper", "miks"],
     Initiators:  ["breach", "fade", "gekko", "kayo", "skye", "sova", "tejo"],
     Sentinels:   ["chamber", "cypher", "deadlock", "killjoy", "sage", "vyse", "veto"]
